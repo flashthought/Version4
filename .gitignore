@@ -1,0 +1,14 @@
+# Datasets only. Everything else (results, figures, checkpoints, deployment
+# exports, summaries, archived runs) is tracked.
+#
+# Excluded because these are the raw/processed data itself: regenerable via the
+# download and preprocessing scripts, several GB in size, and the .npz window
+# archives individually exceed GitHub's 100MB per-file limit. data/raw/ also
+# holds symlinks to the other project folders, which would be broken in clones.
+/data/raw/
+/data/processed/*.npz
+/data/synthetic/patient_*.npz
+
+__pycache__/
+*.pyc
+.venv/

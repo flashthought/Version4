@@ -1,0 +1,35 @@
+training:
+  num_epochs: 50
+  batch_size: 16
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip_norm: 1.0
+  early_stopping_patience: 5
+  early_stopping_min_delta: 0.01
+  processed_archive: data/processed/synthetic_windows.npz
+  training_regime: ppg_ecg_abp_intervention
+  use_modality_dropout: true
+  forecast_step_sec: 1.0
+  holdout_scenarios: []
+  train_models:
+    - data_only
+    - physics_informed
+  log_every: 1
+  device: auto
+
+modality_dropout:
+  ecg: 0.15
+  abp: 0.20
+  intervention: 0.30
+
+loss:
+  data_only:
+    w_obs: 1.0
+    w_phys: 0.0
+    w_param: 0.0
+    w_pulse: 0.0
+  physics_informed:
+    w_obs: 1.0
+    w_phys: 0.15
+    w_param: 0.5
+    w_pulse: 0.1

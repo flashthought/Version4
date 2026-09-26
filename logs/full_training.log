@@ -1,0 +1,68 @@
+Training device: cuda
+Loading datasets: Train=210 cases, Val=45 cases, Test=45 cases...
+Using processed archive: data/processed/synthetic_windows.npz
+Total window samples: Train=9006, Val=1815, Test=1965
+Forecast target: 15 steps at 1 sec/step
+Training models: Data-Only Baseline, Physics-Informed Model
+
+==========================================
+Training Data-Only Baseline...
+==========================================
+Epoch 01/80 | Train MAE: 28.61 mmHg | Val MAE: 19.13 mmHg
+Epoch 02/80 | Train MAE: 21.25 mmHg | Val MAE: 21.60 mmHg
+Epoch 03/80 | Train MAE: 20.85 mmHg | Val MAE: 21.42 mmHg
+Epoch 04/80 | Train MAE: 20.74 mmHg | Val MAE: 19.29 mmHg
+Epoch 05/80 | Train MAE: 20.51 mmHg | Val MAE: 19.20 mmHg
+Epoch 06/80 | Train MAE: 20.57 mmHg | Val MAE: 19.44 mmHg
+Epoch 07/80 | Train MAE: 20.62 mmHg | Val MAE: 21.43 mmHg
+Epoch 08/80 | Train MAE: 20.53 mmHg | Val MAE: 19.63 mmHg
+Epoch 09/80 | Train MAE: 20.60 mmHg | Val MAE: 19.19 mmHg
+Epoch 10/80 | Train MAE: 20.45 mmHg | Val MAE: 19.37 mmHg
+Epoch 11/80 | Train MAE: 20.47 mmHg | Val MAE: 19.58 mmHg
+Early stopping at epoch 11; best Val MAE 19.13 mmHg at epoch 01.
+Saved best model checkpoint from epoch 1 to data/models/data-only_baseline.pth
+
+Evaluating Data-Only Baseline on Held-Out Test Cohort...
+
+==========================================
+Training Physics-Informed Model...
+==========================================
+Epoch 01/80 | Train MAE: 31.56 mmHg | Val MAE: 21.94 mmHg
+Epoch 02/80 | Train MAE: 23.28 mmHg | Val MAE: 20.64 mmHg
+Epoch 03/80 | Train MAE: 22.69 mmHg | Val MAE: 20.75 mmHg
+Epoch 04/80 | Train MAE: 22.18 mmHg | Val MAE: 20.36 mmHg
+Epoch 05/80 | Train MAE: 21.73 mmHg | Val MAE: 20.29 mmHg
+Epoch 06/80 | Train MAE: 21.46 mmHg | Val MAE: 20.43 mmHg
+Epoch 07/80 | Train MAE: 21.68 mmHg | Val MAE: 22.86 mmHg
+Epoch 08/80 | Train MAE: 21.54 mmHg | Val MAE: 20.16 mmHg
+Epoch 09/80 | Train MAE: 21.29 mmHg | Val MAE: 20.16 mmHg
+Epoch 10/80 | Train MAE: 21.50 mmHg | Val MAE: 20.46 mmHg
+Epoch 11/80 | Train MAE: 21.47 mmHg | Val MAE: 21.06 mmHg
+Epoch 12/80 | Train MAE: 21.46 mmHg | Val MAE: 20.76 mmHg
+Epoch 13/80 | Train MAE: 21.49 mmHg | Val MAE: 20.58 mmHg
+Epoch 14/80 | Train MAE: 21.50 mmHg | Val MAE: 21.24 mmHg
+Epoch 15/80 | Train MAE: 21.28 mmHg | Val MAE: 20.17 mmHg
+Epoch 16/80 | Train MAE: 21.33 mmHg | Val MAE: 20.33 mmHg
+Epoch 17/80 | Train MAE: 21.50 mmHg | Val MAE: 20.30 mmHg
+Epoch 18/80 | Train MAE: 21.24 mmHg | Val MAE: 20.36 mmHg
+Early stopping at epoch 18; best Val MAE 20.16 mmHg at epoch 08.
+Saved best model checkpoint from epoch 8 to data/models/physics-informed_model.pth
+
+Evaluating Physics-Informed Model on Held-Out Test Cohort...
+
+=======================================================
+FINAL HEAD-TO-HEAD COMPARISON ON HELD-OUT TEST COHORT
+=======================================================
+                 Model                   Regime  Test_MAE_mmHg  Test_RMSE_mmHg  Physics_Residual  R_Correlation  C_Correlation
+    Data-Only Baseline                 ppg_only      31.548084       36.481312         43.811920       0.410410       0.399968
+    Data-Only Baseline                  ppg_ecg      31.731936       36.855968         35.848545       0.386007       0.399973
+    Data-Only Baseline              ppg_ecg_abp      17.766432       18.625101         46.253532       0.491277       0.049125
+    Data-Only Baseline ppg_ecg_abp_intervention      17.688454       18.534996         45.844162       0.483183       0.030448
+Physics-Informed Model                 ppg_only      29.129450       33.585125          1.584963       0.451327      -0.349960
+Physics-Informed Model                  ppg_ecg      29.240829       33.670116          1.591852       0.461249      -0.377607
+Physics-Informed Model              ppg_ecg_abp      18.802814       19.770651          2.864201       0.580033       0.023900
+Physics-Informed Model ppg_ecg_abp_intervention      18.650055       19.569876          2.836766       0.568649       0.045596
+
+Saved head-to-head comparison to data/synthetic/model_comparison_results.csv
+Saved per-window test predictions to data/synthetic/test_window_predictions.csv
+Saved forecast overlay examples to data/synthetic/forecast_examples.npz

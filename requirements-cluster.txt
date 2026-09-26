@@ -1,0 +1,30 @@
+# Cluster/runtime requirements excluding PyTorch.
+#
+# Install PyTorch separately using the CUDA module/version supported by your
+# cluster. Examples:
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+#
+# Then install this file:
+#   pip install -r requirements-cluster.txt
+
+# Core numerical and scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+
+# Physiological signal processing and medical datasets
+wfdb>=4.1.0
+vitaldb>=1.4.0
+scikit-learn>=1.3.0
+PyWavelets>=1.4.0
+
+# Utilities
+pyyaml>=6.0
+tqdm>=4.65.0
+
+# Testing
+pytest>=7.0.0
+

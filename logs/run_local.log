@@ -1,0 +1,447 @@
+Project directory: /home/kyei/Document/Version 4
+Host: dipperlab-internal
+Synthetic patients: 5000
+Synthetic duration: 180 sec
+Epochs: 80 | Batch size: 64
+Real fine-tuning: 1
+Started: Sat Sep 26 12:42:20 UTC 2026
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+torch: 2.11.0+cu128
+cuda: True
+device: NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition
+[12:42:21] Generating synthetic cohort...
+Generated 5000 synthetic patient trajectories in data/synthetic
+Cohort summary saved to data/synthetic/cohort_summary.csv
+Simulator configuration saved to data/synthetic/simulator_config.json
+[12:54:43] Preprocessing synthetic cohort...
+Wrote 390000 synthetic windows to data/processed/synthetic_windows.npz
+Wrote per-window summary to data/processed/synthetic_windows_summary.csv
+Valid windows: 347736/390000
+[13:06:45] Preprocessing VitalDB (reusing 3458 downloaded cases)...
+Processed 3458 VitalDB cases.
+Wrote 518700 windows to data/processed/vitaldb_windows.npz
+Wrote per-window summary to data/processed/vitaldb_windows_summary.csv
+Valid windows: 271647/518700
+[13:23:43] Preprocessing MIMIC-BP...
+Processed 200 subjects, 18000 windows so far...
+Processed 400 subjects, 36000 windows so far...
+Processed 600 subjects, 54000 windows so far...
+Processed 800 subjects, 72000 windows so far...
+Processed 1000 subjects, 90000 windows so far...
+Processed 1200 subjects, 108000 windows so far...
+Processed 1400 subjects, 126000 windows so far...
+Processed 1524 MIMIC-BP subjects.
+Wrote 137160 windows to data/processed/mimicbp_windows.npz
+Wrote per-window summary to data/processed/mimicbp_windows_summary.csv
+Valid windows: 137146/137160
+split
+train    99000
+test     20610
+val      17550
+Name: count, dtype: int64
+[13:27:57] Training full synthetic model comparison...
+Training device: cuda
+Loading datasets: Train=3500 cases, Val=750 cases, Test=750 cases...
+Using processed archive: data/processed/synthetic_windows.npz
+Total window samples: Train=243714, Val=51953, Test=52069
+Forecast target: 15 steps at 1 sec/step
+Parameter loss scales: R=0.195, C=0.284
+Training models: Data-Only Baseline, Physics-Informed Model
+
+==========================================
+Training Data-Only Baseline...
+==========================================
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+Epoch 01/80 | Train MAE: 17.73 mmHg | Val MAE: 16.88 mmHg
+Epoch 02/80 | Train MAE: 17.42 mmHg | Val MAE: 16.83 mmHg
+Epoch 03/80 | Train MAE: 17.38 mmHg | Val MAE: 16.63 mmHg
+Epoch 04/80 | Train MAE: 17.32 mmHg | Val MAE: 16.76 mmHg
+Epoch 05/80 | Train MAE: 17.24 mmHg | Val MAE: 16.32 mmHg
+Epoch 06/80 | Train MAE: 16.76 mmHg | Val MAE: 15.63 mmHg
+Epoch 07/80 | Train MAE: 16.53 mmHg | Val MAE: 15.47 mmHg
+Epoch 08/80 | Train MAE: 16.42 mmHg | Val MAE: 15.53 mmHg
+Epoch 09/80 | Train MAE: 16.23 mmHg | Val MAE: 15.59 mmHg
+Epoch 10/80 | Train MAE: 16.05 mmHg | Val MAE: 14.96 mmHg
+Epoch 11/80 | Train MAE: 15.81 mmHg | Val MAE: 14.62 mmHg
+Epoch 12/80 | Train MAE: 15.51 mmHg | Val MAE: 15.73 mmHg
+Epoch 13/80 | Train MAE: 15.32 mmHg | Val MAE: 14.36 mmHg
+Epoch 14/80 | Train MAE: 15.15 mmHg | Val MAE: 14.15 mmHg
+Epoch 15/80 | Train MAE: 14.98 mmHg | Val MAE: 13.96 mmHg
+Epoch 16/80 | Train MAE: 14.81 mmHg | Val MAE: 13.56 mmHg
+Epoch 17/80 | Train MAE: 14.54 mmHg | Val MAE: 18.46 mmHg
+Epoch 18/80 | Train MAE: 14.27 mmHg | Val MAE: 12.88 mmHg
+Epoch 19/80 | Train MAE: 14.06 mmHg | Val MAE: 13.58 mmHg
+Epoch 20/80 | Train MAE: 13.88 mmHg | Val MAE: 13.15 mmHg
+Epoch 21/80 | Train MAE: 13.73 mmHg | Val MAE: 12.31 mmHg
+Epoch 22/80 | Train MAE: 13.59 mmHg | Val MAE: 12.86 mmHg
+Epoch 23/80 | Train MAE: 13.47 mmHg | Val MAE: 12.29 mmHg
+Epoch 24/80 | Train MAE: 13.32 mmHg | Val MAE: 11.89 mmHg
+Epoch 25/80 | Train MAE: 13.19 mmHg | Val MAE: 11.69 mmHg
+Epoch 26/80 | Train MAE: 13.07 mmHg | Val MAE: 11.84 mmHg
+Epoch 27/80 | Train MAE: 12.96 mmHg | Val MAE: 11.49 mmHg
+Epoch 28/80 | Train MAE: 12.86 mmHg | Val MAE: 11.44 mmHg
+Epoch 29/80 | Train MAE: 12.75 mmHg | Val MAE: 12.46 mmHg
+Epoch 30/80 | Train MAE: 12.65 mmHg | Val MAE: 12.06 mmHg
+Epoch 31/80 | Train MAE: 12.48 mmHg | Val MAE: 11.43 mmHg
+Epoch 32/80 | Train MAE: 12.35 mmHg | Val MAE: 10.82 mmHg
+Epoch 33/80 | Train MAE: 12.24 mmHg | Val MAE: 11.26 mmHg
+Epoch 34/80 | Train MAE: 12.10 mmHg | Val MAE: 10.68 mmHg
+Epoch 35/80 | Train MAE: 12.00 mmHg | Val MAE: 10.75 mmHg
+Epoch 36/80 | Train MAE: 11.91 mmHg | Val MAE: 10.66 mmHg
+Epoch 37/80 | Train MAE: 11.82 mmHg | Val MAE: 10.81 mmHg
+Epoch 38/80 | Train MAE: 11.76 mmHg | Val MAE: 12.76 mmHg
+Epoch 39/80 | Train MAE: 11.66 mmHg | Val MAE: 10.04 mmHg
+Epoch 40/80 | Train MAE: 11.59 mmHg | Val MAE: 10.95 mmHg
+Epoch 41/80 | Train MAE: 11.51 mmHg | Val MAE: 11.02 mmHg
+Epoch 42/80 | Train MAE: 11.47 mmHg | Val MAE: 10.44 mmHg
+Epoch 43/80 | Train MAE: 11.42 mmHg | Val MAE: 10.54 mmHg
+Epoch 44/80 | Train MAE: 11.34 mmHg | Val MAE: 9.88 mmHg
+Epoch 45/80 | Train MAE: 11.31 mmHg | Val MAE: 9.92 mmHg
+Epoch 46/80 | Train MAE: 11.24 mmHg | Val MAE: 9.63 mmHg
+Epoch 47/80 | Train MAE: 11.20 mmHg | Val MAE: 9.64 mmHg
+Epoch 48/80 | Train MAE: 11.15 mmHg | Val MAE: 9.59 mmHg
+Epoch 49/80 | Train MAE: 11.12 mmHg | Val MAE: 9.70 mmHg
+Epoch 50/80 | Train MAE: 11.08 mmHg | Val MAE: 10.40 mmHg
+Epoch 51/80 | Train MAE: 11.04 mmHg | Val MAE: 10.52 mmHg
+Epoch 52/80 | Train MAE: 10.99 mmHg | Val MAE: 9.95 mmHg
+Epoch 53/80 | Train MAE: 10.97 mmHg | Val MAE: 10.33 mmHg
+Epoch 54/80 | Train MAE: 10.92 mmHg | Val MAE: 9.43 mmHg
+Epoch 55/80 | Train MAE: 10.87 mmHg | Val MAE: 9.43 mmHg
+Epoch 56/80 | Train MAE: 10.86 mmHg | Val MAE: 9.37 mmHg
+Epoch 57/80 | Train MAE: 10.83 mmHg | Val MAE: 9.60 mmHg
+Epoch 58/80 | Train MAE: 10.81 mmHg | Val MAE: 9.27 mmHg
+Epoch 59/80 | Train MAE: 10.78 mmHg | Val MAE: 10.38 mmHg
+Epoch 60/80 | Train MAE: 10.75 mmHg | Val MAE: 9.38 mmHg
+Epoch 61/80 | Train MAE: 10.75 mmHg | Val MAE: 9.71 mmHg
+Epoch 62/80 | Train MAE: 10.71 mmHg | Val MAE: 10.63 mmHg
+Epoch 63/80 | Train MAE: 10.68 mmHg | Val MAE: 10.29 mmHg
+Epoch 64/80 | Train MAE: 10.68 mmHg | Val MAE: 10.09 mmHg
+Epoch 65/80 | Train MAE: 10.67 mmHg | Val MAE: 10.05 mmHg
+Epoch 66/80 | Train MAE: 10.64 mmHg | Val MAE: 9.45 mmHg
+Epoch 67/80 | Train MAE: 10.63 mmHg | Val MAE: 9.11 mmHg
+Epoch 68/80 | Train MAE: 10.62 mmHg | Val MAE: 9.57 mmHg
+Epoch 69/80 | Train MAE: 10.61 mmHg | Val MAE: 9.18 mmHg
+Epoch 70/80 | Train MAE: 10.60 mmHg | Val MAE: 9.14 mmHg
+Epoch 71/80 | Train MAE: 10.58 mmHg | Val MAE: 9.64 mmHg
+Epoch 72/80 | Train MAE: 10.59 mmHg | Val MAE: 9.58 mmHg
+Epoch 73/80 | Train MAE: 10.60 mmHg | Val MAE: 9.42 mmHg
+Epoch 74/80 | Train MAE: 10.56 mmHg | Val MAE: 12.30 mmHg
+Epoch 75/80 | Train MAE: 10.57 mmHg | Val MAE: 9.67 mmHg
+Epoch 76/80 | Train MAE: 10.55 mmHg | Val MAE: 9.47 mmHg
+Epoch 77/80 | Train MAE: 10.59 mmHg | Val MAE: 10.80 mmHg
+Early stopping at epoch 77; best Val MAE 9.11 mmHg at epoch 67.
+Saved best model checkpoint from epoch 67 to data/models/data-only_baseline.pth
+
+Evaluating Data-Only Baseline on Held-Out Test Cohort...
+
+==========================================
+Training Physics-Informed Model...
+==========================================
+Epoch 01/80 | Train MAE: 19.83 mmHg | Val MAE: 18.70 mmHg
+Epoch 02/80 | Train MAE: 19.11 mmHg | Val MAE: 18.26 mmHg
+Epoch 03/80 | Train MAE: 18.96 mmHg | Val MAE: 18.36 mmHg
+Epoch 04/80 | Train MAE: 18.36 mmHg | Val MAE: 17.29 mmHg
+Epoch 05/80 | Train MAE: 17.84 mmHg | Val MAE: 16.55 mmHg
+Epoch 06/80 | Train MAE: 17.45 mmHg | Val MAE: 16.28 mmHg
+Epoch 07/80 | Train MAE: 17.30 mmHg | Val MAE: 16.22 mmHg
+Epoch 08/80 | Train MAE: 17.14 mmHg | Val MAE: 16.90 mmHg
+Epoch 09/80 | Train MAE: 16.97 mmHg | Val MAE: 15.95 mmHg
+Epoch 10/80 | Train MAE: 16.72 mmHg | Val MAE: 16.05 mmHg
+Epoch 11/80 | Train MAE: 16.44 mmHg | Val MAE: 15.28 mmHg
+Epoch 12/80 | Train MAE: 16.17 mmHg | Val MAE: 14.95 mmHg
+Epoch 13/80 | Train MAE: 15.93 mmHg | Val MAE: 14.78 mmHg
+Epoch 14/80 | Train MAE: 15.72 mmHg | Val MAE: 14.74 mmHg
+Epoch 15/80 | Train MAE: 15.53 mmHg | Val MAE: 14.41 mmHg
+Epoch 16/80 | Train MAE: 15.28 mmHg | Val MAE: 14.16 mmHg
+Epoch 17/80 | Train MAE: 15.07 mmHg | Val MAE: 14.08 mmHg
+Epoch 18/80 | Train MAE: 14.88 mmHg | Val MAE: 13.88 mmHg
+Epoch 19/80 | Train MAE: 14.70 mmHg | Val MAE: 13.45 mmHg
+Epoch 20/80 | Train MAE: 14.55 mmHg | Val MAE: 13.70 mmHg
+Epoch 21/80 | Train MAE: 14.41 mmHg | Val MAE: 13.24 mmHg
+Epoch 22/80 | Train MAE: 14.30 mmHg | Val MAE: 13.36 mmHg
+Epoch 23/80 | Train MAE: 14.17 mmHg | Val MAE: 13.90 mmHg
+Epoch 24/80 | Train MAE: 14.05 mmHg | Val MAE: 12.74 mmHg
+Epoch 25/80 | Train MAE: 13.92 mmHg | Val MAE: 13.14 mmHg
+Epoch 26/80 | Train MAE: 13.84 mmHg | Val MAE: 12.72 mmHg
+Epoch 27/80 | Train MAE: 13.76 mmHg | Val MAE: 12.65 mmHg
+Epoch 28/80 | Train MAE: 13.69 mmHg | Val MAE: 12.61 mmHg
+Epoch 29/80 | Train MAE: 13.59 mmHg | Val MAE: 12.28 mmHg
+Epoch 30/80 | Train MAE: 13.51 mmHg | Val MAE: 12.36 mmHg
+Epoch 31/80 | Train MAE: 13.41 mmHg | Val MAE: 12.46 mmHg
+Epoch 32/80 | Train MAE: 13.35 mmHg | Val MAE: 12.12 mmHg
+Epoch 33/80 | Train MAE: 13.20 mmHg | Val MAE: 11.95 mmHg
+Epoch 34/80 | Train MAE: 12.98 mmHg | Val MAE: 11.69 mmHg
+Epoch 35/80 | Train MAE: 12.90 mmHg | Val MAE: 11.76 mmHg
+Epoch 36/80 | Train MAE: 12.83 mmHg | Val MAE: 12.01 mmHg
+Epoch 37/80 | Train MAE: 12.75 mmHg | Val MAE: 12.35 mmHg
+Epoch 38/80 | Train MAE: 12.71 mmHg | Val MAE: 11.47 mmHg
+Epoch 39/80 | Train MAE: 12.66 mmHg | Val MAE: 11.53 mmHg
+Epoch 40/80 | Train MAE: 12.63 mmHg | Val MAE: 11.39 mmHg
+Epoch 41/80 | Train MAE: 12.56 mmHg | Val MAE: 11.84 mmHg
+Epoch 42/80 | Train MAE: 12.51 mmHg | Val MAE: 11.20 mmHg
+Epoch 43/80 | Train MAE: 12.50 mmHg | Val MAE: 11.46 mmHg
+Epoch 44/80 | Train MAE: 12.45 mmHg | Val MAE: 12.17 mmHg
+Epoch 45/80 | Train MAE: 12.41 mmHg | Val MAE: 11.06 mmHg
+Epoch 46/80 | Train MAE: 12.35 mmHg | Val MAE: 11.06 mmHg
+Epoch 47/80 | Train MAE: 12.33 mmHg | Val MAE: 10.97 mmHg
+Epoch 48/80 | Train MAE: 12.27 mmHg | Val MAE: 11.03 mmHg
+Epoch 49/80 | Train MAE: 12.25 mmHg | Val MAE: 10.99 mmHg
+Epoch 50/80 | Train MAE: 12.21 mmHg | Val MAE: 10.90 mmHg
+Epoch 51/80 | Train MAE: 12.21 mmHg | Val MAE: 11.51 mmHg
+Epoch 52/80 | Train MAE: 12.15 mmHg | Val MAE: 10.93 mmHg
+Epoch 53/80 | Train MAE: 12.13 mmHg | Val MAE: 10.91 mmHg
+Epoch 54/80 | Train MAE: 12.12 mmHg | Val MAE: 10.74 mmHg
+Epoch 55/80 | Train MAE: 12.08 mmHg | Val MAE: 10.74 mmHg
+Epoch 56/80 | Train MAE: 12.08 mmHg | Val MAE: 10.77 mmHg
+Epoch 57/80 | Train MAE: 12.06 mmHg | Val MAE: 10.65 mmHg
+Epoch 58/80 | Train MAE: 12.03 mmHg | Val MAE: 11.05 mmHg
+Epoch 59/80 | Train MAE: 12.00 mmHg | Val MAE: 10.62 mmHg
+Epoch 60/80 | Train MAE: 11.98 mmHg | Val MAE: 10.67 mmHg
+Epoch 61/80 | Train MAE: 11.97 mmHg | Val MAE: 10.65 mmHg
+Epoch 62/80 | Train MAE: 11.96 mmHg | Val MAE: 10.69 mmHg
+Epoch 63/80 | Train MAE: 11.94 mmHg | Val MAE: 10.59 mmHg
+Epoch 64/80 | Train MAE: 11.92 mmHg | Val MAE: 11.89 mmHg
+Epoch 65/80 | Train MAE: 11.92 mmHg | Val MAE: 10.54 mmHg
+Epoch 66/80 | Train MAE: 11.88 mmHg | Val MAE: 10.53 mmHg
+Epoch 67/80 | Train MAE: 11.89 mmHg | Val MAE: 10.89 mmHg
+Epoch 68/80 | Train MAE: 11.87 mmHg | Val MAE: 10.71 mmHg
+Epoch 69/80 | Train MAE: 11.88 mmHg | Val MAE: 10.59 mmHg
+Epoch 70/80 | Train MAE: 11.87 mmHg | Val MAE: 11.32 mmHg
+Epoch 71/80 | Train MAE: 11.86 mmHg | Val MAE: 10.60 mmHg
+Epoch 72/80 | Train MAE: 11.84 mmHg | Val MAE: 11.77 mmHg
+Epoch 73/80 | Train MAE: 11.85 mmHg | Val MAE: 10.62 mmHg
+Epoch 74/80 | Train MAE: 11.85 mmHg | Val MAE: 10.76 mmHg
+Epoch 75/80 | Train MAE: 11.83 mmHg | Val MAE: 12.02 mmHg
+Epoch 76/80 | Train MAE: 11.84 mmHg | Val MAE: 10.53 mmHg
+Epoch 77/80 | Train MAE: 11.84 mmHg | Val MAE: 10.67 mmHg
+Epoch 78/80 | Train MAE: 11.82 mmHg | Val MAE: 10.72 mmHg
+Epoch 79/80 | Train MAE: 11.83 mmHg | Val MAE: 10.63 mmHg
+Epoch 80/80 | Train MAE: 11.84 mmHg | Val MAE: 10.99 mmHg
+Saved best model checkpoint from epoch 76 to data/models/physics-informed_model.pth
+
+Evaluating Physics-Informed Model on Held-Out Test Cohort...
+
+=======================================================
+FINAL HEAD-TO-HEAD COMPARISON ON HELD-OUT TEST COHORT
+=======================================================
+                   Model                   Regime  Test_MAE_mmHg  Test_RMSE_mmHg  Physics_Residual  R_Correlation  C_Correlation    R_MAE    C_MAE  R_RelErr_pct  C_RelErr_pct  R_Pred_Std  C_Pred_Std  R_True_Std  C_True_Std
+     Train-Mean Baseline              all_regimes      25.673487       28.421058               NaN            NaN            NaN      NaN      NaN           NaN           NaN         NaN         NaN         NaN         NaN
+ABP Persistence Baseline              ppg_ecg_abp      21.098910       23.243495               NaN            NaN            NaN      NaN      NaN           NaN           NaN         NaN         NaN         NaN         NaN
+      Data-Only Baseline                 ppg_only      32.955193       35.540279         91.679207      -0.003297       0.010680 1.121826 0.710631    146.207733     65.612518    1.434422    0.781954    0.197395    0.286898
+      Data-Only Baseline                  ppg_ecg      32.408478       35.191021         91.687210       0.002202       0.004040 1.144296 0.755821    149.085022     70.813377    1.469007    0.876754    0.197395    0.286898
+      Data-Only Baseline              ppg_ecg_abp      18.584627       19.613989        136.819229       0.063533      -0.051968 1.142191 1.155944    145.421280    113.058876    1.481835    1.486329    0.197395    0.286898
+      Data-Only Baseline ppg_ecg_abp_intervention       9.014592        9.867660        109.833672       0.055154      -0.113084 0.936779 1.164555    119.685066    116.286682    1.261065    1.444615    0.197395    0.286898
+  Physics-Informed Model                 ppg_only      29.982729       31.990009         21.484289       0.448399       0.628068 0.221825 0.178497     33.941044     17.286209    0.057083    0.193655    0.197395    0.286898
+  Physics-Informed Model                  ppg_ecg      29.659563       31.679268         21.331024       0.439726       0.623836 0.220999 0.179419     33.817036     17.411747    0.057850    0.193655    0.197395    0.286898
+  Physics-Informed Model              ppg_ecg_abp      12.697501       13.623883         19.005583       0.805946       0.873451 0.104526 0.116131     14.042878     10.798524    0.183430    0.294317    0.197395    0.286898
+  Physics-Informed Model ppg_ecg_abp_intervention      10.443880       11.471164         19.185688       0.810347       0.878424 0.101129 0.111143     13.210186     10.176728    0.197318    0.286271    0.197395    0.286898
+
+Saved head-to-head comparison to data/synthetic/model_comparison_results.csv
+Saved per-window test predictions to data/synthetic/test_window_predictions.csv
+Saved forecast overlay examples to data/synthetic/forecast_examples.npz
+[15:55:29] Fine-tuning physics-informed model on real processed windows...
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+Fine-tuning on 120000 real windows; validating on 24000 windows.
+Real fine-tune epoch 01/08 | Train MAE 12.90 | Val MAE 12.15
+Real fine-tune epoch 02/08 | Train MAE 12.16 | Val MAE 11.91
+Real fine-tune epoch 03/08 | Train MAE 11.96 | Val MAE 11.79
+Real fine-tune epoch 04/08 | Train MAE 11.84 | Val MAE 11.67
+Real fine-tune epoch 05/08 | Train MAE 11.75 | Val MAE 11.59
+Real fine-tune epoch 06/08 | Train MAE 11.68 | Val MAE 11.54
+Real fine-tune epoch 07/08 | Train MAE 11.62 | Val MAE 11.50
+Real fine-tune epoch 08/08 | Train MAE 11.57 | Val MAE 11.45
+Saved real-data fine-tuned checkpoint to data/models/physics-informed_real_finetuned.pth
+[15:59:44] Exporting deployment model metadata...
+Wrote model metadata to data/models/model_metadata.json
+[15:59:45] Exporting app-importable deployment model...
+Saved TorchScript model to data/models/deployment/physics_informed_hemo.pt
+/home/kyei/Document/Version 4/src/inference/export_deployment_model.py:71: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0926 15:59:46.790000 493960 torch/onnx/_internal/exporter/_compat.py:133] Setting ONNX exporter to use operator set version 18 because the requested opset_version 17 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0926 15:59:47.169000 493960 torch/onnx/_internal/exporter/_registration.py:110] torchvision is not installed. Skipping torchvision::nms
+W0926 15:59:47.169000 493960 torch/onnx/_internal/exporter/_registration.py:110] torchvision is not installed. Skipping torchvision::roi_align
+W0926 15:59:47.169000 493960 torch/onnx/_internal/exporter/_registration.py:110] torchvision is not installed. Skipping torchvision::roi_pool
+W0926 15:59:47.170000 493960 torch/onnx/_internal/exporter/_registration.py:110] torchvision is not installed. Skipping torchvision::deform_conv2d
+[torch.onnx] Obtain model graph for `DeploymentModelWrapper([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `DeploymentModelWrapper([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decompositions...
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+/usr/lib/python3.14/copyreg.py:104: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+[torch.onnx] Run decompositions... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 17).
+Failed to convert the model to the target version 17 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/onnxscript/version_converter/__init__.py", line 137, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+        func=_partial_convert_version, model=model
+    )
+  File "/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/onnxscript/version_converter/_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/onnxscript/version_converter/__init__.py", line 132, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        proto, target_version=self.target_version
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/onnx/version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: /project/onnx/version_converter/adapters/axes_input_to_attribute.h:55: adapt: Assertion `node->hasAttribute(kaxes)` failed: No initializer or constant input to node found
+[torch.onnx] Optimize the ONNX graph...
+Skipping constant folding for op Split with multiple outputs.
+Skipping constant folding for op Split with multiple outputs.
+[torch.onnx] Optimize the ONNX graph... ✅
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/onnx/_internal/exporter/_onnx_program.py:487: UserWarning: # The axis name: batch will not be used, since it shares the same shape constraints with another axis: batch.
+  rename_mapping = _dynamic_shapes.create_rename_mapping(
+Saved ONNX model to data/models/deployment/physics_informed_hemo.onnx
+[15:59:49] Evaluating on MIMIC-BP test windows...
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+MIMIC-BP processed-window evaluation
+Windows: 20608
+MAE : 12.42 mmHg
+RMSE: 15.58 mmHg
+Saved per-window results to data/processed/mimicbp_evaluation.csv
+[15:59:58] Evaluating on VitalDB windows...
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+VitalDB processed-window evaluation
+Windows: 40121
+MAE : 11.83 mmHg
+RMSE: 15.60 mmHg
+Intervention windows: 2929
+Saved per-window results to data/processed/vitaldb_evaluation.csv
+[16:00:23] Validating simulator realism...
+Saved simulator distribution summary to data/figures/simulator_validation/simulator_distribution_summary.csv
+Saved simulator-real overlap summary to data/figures/simulator_validation/simulator_real_overlap_summary.csv
+[16:00:27] Running explainability analysis...
+/home/kyei/Document/Class-Project/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:1061: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+Saved explainability map to data/synthetic/explainability/ig_synthetic_synthetic_001_0_forecast.png
+Saved explainability metadata to data/synthetic/explainability/ig_metadata.csv
+[16:00:44] Generating result plots...
+Saved data/figures/dataset_role_schematic.png
+Saved data/figures/regime_comparison_test_mae_mmhg.png
+Saved data/figures/regime_comparison_test_rmse_mmhg.png
+Saved data/figures/regime_comparison_physics_residual.png
+Saved data/figures/regime_comparison_r_correlation.png
+Saved data/figures/regime_comparison_c_correlation.png
+Skipping missing file: data/synthetic/identifiability_ablation_results.csv
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_r.png
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_c.png
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_abp_r.png
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_abp_c.png
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_abp_intervention_r.png
+Saved data/figures/scatter_data-only_baseline_ppg_ecg_abp_intervention_c.png
+Saved data/figures/scatter_data-only_baseline_ppg_only_r.png
+Saved data/figures/scatter_data-only_baseline_ppg_only_c.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_r.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_c.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_abp_r.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_abp_c.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_abp_intervention_r.png
+Saved data/figures/scatter_physics-informed_model_ppg_ecg_abp_intervention_c.png
+Saved data/figures/scatter_physics-informed_model_ppg_only_r.png
+Saved data/figures/scatter_physics-informed_model_ppg_only_c.png
+Saved data/figures/distribution_forecast_mae_mmhg.png
+Saved data/figures/distribution_physics_residual.png
+Saved data/figures/distribution_r_abs_err.png
+Saved data/figures/distribution_c_abs_err.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__0.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__1.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__2.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__3.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__4.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg__5.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__0.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__1.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__2.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__3.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__4.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp__5.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__0.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__1.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__2.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__3.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__4.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_ecg_abp_intervention__5.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__0.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__1.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__2.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__3.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__4.png
+Saved data/figures/forecast_overlay_data-only_baseline__ppg_only__5.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__0.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__1.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__2.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__3.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__4.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg__5.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__0.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__1.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__2.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__3.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__4.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp__5.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__0.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__1.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__2.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__3.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__4.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_ecg_abp_intervention__5.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__0.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__1.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__2.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__3.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__4.png
+Saved data/figures/forecast_overlay_physics-informed_model__ppg_only__5.png
+Saved data/figures/physics_residual_by_model_regime.png
+Saved data/figures/quality_validity_mimicbp_windows.png
+Saved data/figures/quality_hist_mimicbp_windows_composite_sqi.png
+Saved data/figures/quality_hist_mimicbp_windows_heart_rate_bpm.png
+Saved data/figures/quality_hist_mimicbp_windows_mean_pat_ms.png
+Saved data/figures/quality_hist_mimicbp_windows_map.png
+Saved data/figures/quality_hist_mimicbp_windows_pulse_pressure.png
+Saved data/figures/missingness_mimicbp_windows.png
+Saved data/figures/quality_validity_synthetic_windows.png
+Saved data/figures/quality_hist_synthetic_windows_composite_sqi.png
+Saved data/figures/quality_hist_synthetic_windows_heart_rate_bpm.png
+Saved data/figures/quality_hist_synthetic_windows_mean_pat_ms.png
+Saved data/figures/quality_hist_synthetic_windows_map.png
+Saved data/figures/quality_hist_synthetic_windows_pulse_pressure.png
+Saved data/figures/missingness_synthetic_windows.png
+Saved data/figures/quality_validity_vitaldb_windows.png
+Saved data/figures/quality_hist_vitaldb_windows_composite_sqi.png
+Saved data/figures/quality_hist_vitaldb_windows_heart_rate_bpm.png
+Saved data/figures/quality_hist_vitaldb_windows_mean_pat_ms.png
+Saved data/figures/quality_hist_vitaldb_windows_map.png
+Saved data/figures/quality_hist_vitaldb_windows_pulse_pressure.png
+Saved data/figures/missingness_vitaldb_windows.png
+Saved data/figures/vitaldb_intervention_response_0_vitaldb_4388.png
+Saved data/figures/vitaldb_intervention_response_1_vitaldb_4388.png
+Saved data/figures/vitaldb_intervention_response_2_vitaldb_4388.png
+Saved data/figures/vitaldb_intervention_response_3_vitaldb_4388.png
+Saved data/figures/vitaldb_intervention_response_4_vitaldb_4388.png
+Saved data/figures/vitaldb_intervention_response_5_vitaldb_4388.png
+Saved simulator distribution summary to data/figures/simulator_validation/simulator_distribution_summary.csv
+Saved simulator-real overlap summary to data/figures/simulator_validation/simulator_real_overlap_summary.csv
+Done at Sat Sep 26 16:01:16 UTC 2026. Main result table:
+Model,Regime,Test_MAE_mmHg,Test_RMSE_mmHg,Physics_Residual,R_Correlation,C_Correlation,R_MAE,C_MAE,R_RelErr_pct,C_RelErr_pct,R_Pred_Std,C_Pred_Std,R_True_Std,C_True_Std
+Train-Mean Baseline,all_regimes,25.673486796624672,28.421057836421,,,,,,,,,,,
+ABP Persistence Baseline,ppg_ecg_abp,21.098910069740487,23.243494734434183,,,,,,,,,,,
+Data-Only Baseline,ppg_only,32.95519256591797,35.540279388427734,91.67920684814453,-0.0032966026704489126,0.010680160490276548,1.121826171875,0.7106305360794067,146.20773315429688,65.61251831054688,1.4344217777252197,0.7819538116455078,0.197395458817482,0.28689834475517273
+Data-Only Baseline,ppg_ecg,32.408477783203125,35.19102096557617,91.68721008300781,0.002202287945911759,0.004040406157460227,1.1442960500717163,0.7558212876319885,149.08502197265625,70.8133773803711,1.469007134437561,0.8767535090446472,0.197395458817482,0.28689834475517273
+Data-Only Baseline,ppg_ecg_abp,18.584627151489258,19.613988876342773,136.81922912597656,0.06353293655301412,-0.05196843830169668,1.1421912908554077,1.1559443473815918,145.42127990722656,113.05887603759766,1.4818346500396729,1.4863287210464478,0.197395458817482,0.28689834475517273
+Data-Only Baseline,ppg_ecg_abp_intervention,9.014592170715332,9.867659568786621,109.83367156982422,0.05515442296666022,-0.1130836434406874,0.9367789030075073,1.1645551919937134,119.68506622314453,116.28668212890625,1.2610654830932617,1.4446152448654175,0.197395458817482,0.28689834475517273
+Physics-Informed Model,ppg_only,29.982728958129883,31.990009307861328,21.484289169311523,0.44839882436528544,0.6280675691043279,0.2218252718448639,0.1784965693950653,33.941043853759766,17.286209106445312,0.05708329379558563,0.19365468621253967,0.197395458817482,0.28689834475517273
+Physics-Informed Model,ppg_ecg,29.659563064575195,31.67926788330078,21.331024169921875,0.43972641994963463,0.6238361532776897,0.22099947929382324,0.17941869795322418,33.81703567504883,17.411746978759766,0.05784967914223671,0.19365514814853668,0.197395458817482,0.28689834475517273
+Physics-Informed Model,ppg_ecg_abp,12.697501182556152,13.623883247375488,19.005582809448242,0.8059461887813067,0.8734505977885965,0.10452555119991302,0.11613065004348755,14.042878150939941,10.798523902893066,0.1834295392036438,0.2943165600299835,0.197395458817482,0.28689834475517273
+Physics-Informed Model,ppg_ecg_abp_intervention,10.443880081176758,11.471163749694824,19.185688018798828,0.8103472485108788,0.8784242739524967,0.10112908482551575,0.11114335060119629,13.210186004638672,10.176728248596191,0.19731758534908295,0.28627079725265503,0.197395458817482,0.28689834475517273
+Archived run outputs to data/publication_runs/full_local.tar.gz

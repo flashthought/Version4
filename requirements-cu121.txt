@@ -1,0 +1,10 @@
+# CUDA 12.1 PyTorch environment.
+# Use only if your cluster supports CUDA 12.1 compatible PyTorch wheels.
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+torch>=2.3.0
+torchvision>=0.18.0
+torchaudio>=2.3.0
+
+-r requirements-cluster.txt
+

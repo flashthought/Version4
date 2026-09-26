@@ -1,0 +1,64 @@
+{
+  "seed": 42,
+  "num_patients": 5000,
+  "duration_sec": 180.0,
+  "fs": 125.0,
+  "simulator_model": "3element",
+  "artifact_prob": 0.12,
+  "scenarios": [
+    "stable",
+    "septic_shock",
+    "vasopressor_rescue",
+    "low_compliance",
+    "fluid_challenge",
+    "mixed_shock_stiff",
+    "hemorrhage_resuscitation"
+  ],
+  "physiological_ranges": {
+    "heart_rate_bpm": [
+      55.0,
+      105.0
+    ],
+    "stroke_volume_ml": [
+      52.0,
+      90.0
+    ],
+    "systemic_resistance_mmHg_s_ml": [
+      0.64,
+      1.12
+    ],
+    "arterial_compliance_ml_mmHg": [
+      0.72,
+      1.6
+    ],
+    "characteristic_resistance_ratio": [
+      0.065,
+      0.1
+    ],
+    "systole_fraction": [
+      0.3,
+      0.38
+    ],
+    "ppg_transit_time_ms": [
+      350.0,
+      540.0
+    ],
+    "ppg_damping": [
+      0.16,
+      0.4
+    ],
+    "abp_snr_db": [
+      22.0,
+      32.0
+    ],
+    "ppg_snr_db": [
+      16.0,
+      26.0
+    ],
+    "ecg_snr_db": [
+      16.0,
+      26.0
+    ]
+  },
+  "notes": "Ranges are intentionally broad adult perioperative/ICU plausible ranges. Use the saved cohort_summary.csv to report the exact sampled distribution."
+}

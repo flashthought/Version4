@@ -1,0 +1,2 @@
+model_path,archive_path,source,case_id,window_start_sec,target,steps
+data/models/physics-informed_real_finetuned.pth,data/processed/synthetic_windows.npz,synthetic,synthetic_001,0.0,forecast,50

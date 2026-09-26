@@ -1,0 +1,132 @@
+datasets:
+  synthetic:
+    role: controlled_ground_truth_for_identifiability
+    required_observables:
+      - ecg_noisy
+      - ppg_noisy
+      - abp_noisy
+    ground_truth:
+      - R_ground_truth
+      - C_ground_truth
+      - u_intervention
+      - u_vasopressor
+      - u_fluid
+      - q_in
+    metadata:
+      - scenario
+      - simulator_model
+      - simulator_config.json
+      - cohort_summary.csv
+      - artifact_fraction_by_modality
+    outputs:
+      - filtered_ecg_window
+      - filtered_ppg_window
+      - abp_window
+      - future_abp_target
+      - r_true
+      - c_true
+      - intervention_window
+
+  mimicbp:
+    role: public_icu_waveform_characterization
+    required_observables:
+      - ECG
+      - PPG
+      - ABP
+    derived_parameters:
+      - heart_rate_bpm
+      - hrv_sdnn_ms
+      - ppg_pulse_features
+      - pulse_arrival_time
+      - sbp
+      - dbp
+      - map
+      - pulse_pressure
+      - signal_quality_indices
+      - missingness
+    not_expected:
+      - continuous_true_R
+      - continuous_true_C
+      - reliable_intervention_timestamps
+
+  vitaldb:
+    role: high_frequency_waveforms_with_intervention_context
+    required_observables:
+      ecg: SNUADC/ECG_II
+      ppg: SNUADC/PLETH
+      abp: SNUADC/ART
+    targeted_extra_parameters:
+      - vasopressors
+      - vasoactive_boluses
+      - fluid_or_blood_administration
+      - intervention_timestamps
+      - anesthesia_context_when_needed
+      - case_metadata_when_available
+    derived_parameters:
+      - heart_rate_bpm
+      - pulse_arrival_time
+      - sbp
+      - dbp
+      - map
+      - short_horizon_abp_target
+      - intervention_window
+
+processed_window_schema:
+  arrays:
+    - ecg
+    - ppg
+    - abp
+    - future_abp
+    - intervention
+  scalars:
+    - dataset_source
+    - case_id
+    - window_start_sec
+    - fs
+    - forecast_step_sec
+    - forecast_horizon
+    - r_true
+    - c_true
+    - is_valid
+    - abp_physiology_valid
+    - composite_sqi
+    - heart_rate_bpm
+    - mean_pat_ms
+    - sbp
+    - dbp
+    - map
+    - pulse_pressure
+    - missing_ecg_fraction
+    - missing_ppg_fraction
+    - missing_abp_fraction
+    - scenario
+    - simulator_model
+
+observation_regimes:
+  - name: ppg_only
+    inputs:
+      - ppg
+  - name: ppg_ecg
+    inputs:
+      - ppg
+      - ecg
+  - name: ppg_ecg_abp
+    inputs:
+      - ppg
+      - ecg
+      - abp
+  - name: ppg_ecg_abp_intervention
+    inputs:
+      - ppg
+      - ecg
+      - abp
+      - intervention
+
+modality_dropout:
+  training_only: true
+  keep_always:
+    - ppg
+  probabilities:
+    ecg: 0.15
+    abp: 0.20
+    intervention: 0.30

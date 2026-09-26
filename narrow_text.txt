@@ -1,0 +1,337 @@
+Clinical Overview & Motivation
+Incomplete Observability of the Hemodynamic State in Septic Shock
+Septic shock is characterised by rapidly changing and heterogeneous cardiovascular dysfunction. Hypotension may result from intravascular volume depletion, profound vasodilation, impaired vascular tone, myocardial dysfunction, altered arterial properties, or combinations of these mechanisms. These changes can evolve during disease progression and in response to interventions such as fluids and vasopressors.
+Arterial blood pressure provides an important but incomplete view of this underlying hemodynamic state. For example, an increase in cardiac output following fluid administration does not necessarily produce a corresponding increase in mean arterial pressure if systemic vascular resistance or arterial load changes simultaneously. Consequently, important hemodynamic quantities, including vascular resistance and arterial compliance, are not continuously observed at the bedside and must be inferred from available measurements and their responses over time.
+This creates an incomplete-observability problem: the physiological state governing pressure and perfusion is only partially represented by the signals that can be measured continuously.
+The proposed work therefore investigates whether computational methods can infer this latent cardiovascular state from routinely available physiological waveforms, while incorporating known cardiovascular relationships as physical constraints. Rather than treating septic shock prediction as a conventional classification problem, the study focuses on the underlying inverse problem: what aspects of the latent hemodynamic state can be recovered from observable physiological signals, and what additional observations are required to make that recovery identifiable?
+The clinical motivation comes from septic shock and other forms of hemodynamic instability, but the methodological development will initially be performed using fully public datasets and controlled simulation. This allows the physiological inference problem to be investigated without depending on access to a large, annotated septic-shock cohort.
+
+Refined Project Scope
+Proposed Title
+Physics-Informed Estimation of Latent Hemodynamic States from Multimodal Physiological Signals
+
+Primary Research Question
+Can routinely available physiological waveforms, including ECG, PPG and arterial blood pressure, support physics-informed estimation of latent hemodynamic parameters, particularly vascular resistance and arterial compliance, and how does parameter identifiability change as additional observations and intervention information are incorporated?
+
+Secondary Research Question
+Can the estimated latent hemodynamic state support short-horizon forecasting of arterial pressure dynamics?
+
+Scope and Boundaries
+The study will:
+Focus on ECG, PPG and arterial blood pressure (ABP) as the primary observable signals.
+Investigate latent hemodynamic parameters, particularly systemic vascular resistance and arterial compliance.
+Examine arterial load and short-term blood-pressure dynamics as related state variables or downstream outcomes.
+Use a reduced-order cardiovascular simulator as the ground-truth environment for controlled parameter-recovery and identifiability experiments.
+Compare progressively richer observation regimes to determine how additional signals improve latent-state estimation.
+Investigate the potential value of intervention information, such as fluid or vasopressor administration, where reliably available.
+Treat septic shock as the primary clinical motivation and potential future application rather than requiring a large septic-shock cohort in the current methodological stage.
+
+The study will not:
+Depend on a large annotated septic-shock cohort.
+Make clinical claims about septic-shock diagnosis or treatment.
+Attempt to estimate every possible cardiovascular parameter.
+Include credentialed or restricted databases during the current stage.
+Treat model performance on public waveforms as evidence of clinical readiness.
+
+Core Technical Framework
+The proposed work treats the problem as a physics-informed inverse problem.
+
+Observable physiological signals:
+ECG + PPG + ABP
+↓
+Signal processing and feature extraction
+↓
+Physiological and physical constraints
+↓
+Latent hemodynamic parameters/state
+Vascular resistance + arterial compliance + arterial load
+↓
+Short-term state/pressure trajectory
+The underlying assumption is that the measured signals contain complementary information about cardiovascular function, but no single signal provides a complete representation of the underlying hemodynamic state.
+
+Primary Observable Signals
+Electrocardiogram (ECG)
+ECG provides information about cardiac electrical activity and beat-to-beat timing.
+Potential features include:
+Heart rate
+RR intervals
+Heart-rate variability
+Beat-to-beat timing
+Morphological characteristics
+Frequency-domain characteristics
+
+Photoplethysmography (PPG)
+PPG provides information related to peripheral blood-volume and pulse-wave dynamics.
+Potential features include:
+Pulse amplitude
+Pulse width
+Pulse timing
+Pulse-wave morphology
+Rise and decay characteristics
+Pulse-to-pulse variability
+Pulse arrival/transit timing when appropriate
+
+Arterial Blood Pressure (ABP)
+ABP provides direct information about arterial pressure dynamics.
+Potential features include:
+Systolic pressure
+Diastolic pressure
+Mean arterial pressure
+Pulse pressure
+Beat-to-beat variability
+Waveform morphology
+Pressure trajectory
+
+Latent Physiological Targets
+The latent variables will be organised into three levels.
+
+Primary latent parameters
+Systemic vascular resistance
+Arterial compliance
+
+Secondary hemodynamic state variables
+Arterial load
+Overall hemodynamic stability/state
+
+Downstream forecasting target
+Short-term arterial pressure trajectory
+
+The study will distinguish between latent parameters, which describe underlying cardiovascular properties, and the latent hemodynamic state, which represents the evolving physiological condition resulting from those properties and current inputs.
+
+Physics-Informed Component
+The physics-informed component will incorporate established cardiovascular relationships into the estimation framework rather than treating the problem as purely data-driven prediction.
+For example, mean arterial pressure is related to cardiac output and systemic vascular resistance approximately through:
+
+with appropriate consideration of central venous pressure where relevant.
+A reduced-order cardiovascular model can additionally represent arterial compliance and resistance through a Windkessel-type formulation.
+The simulator will therefore provide a controlled environment in which the underlying parameters are known while ECG-, PPG-, and ABP-like observations are generated.
+
+This enables the study to ask a fundamental question:
+Can the hidden parameters that generated the observed waveforms be recovered from those observations?
+
+
+
+Identifiability Framework
+A major component of the project will be to investigate identifiability under progressively richer observation regimes.
+Regime 1: PPG only
+Can latent vascular parameters be recovered from peripheral pulse information alone?
+
+Regime 2: PPG + ECG
+Does information about cardiac electrical timing improve parameter recovery?
+
+Regime 3: PPG + ECG + ABP
+How much does continuous arterial pressure improve identifiability?
+
+Regime 4: PPG + ECG + ABP + intervention information
+Does knowledge of physiological perturbations, such as fluid or vasopressor administration, further constrain the latent state?
+
+The comparison will quantify how parameter recovery changes as information is added.
+Potential evaluation measures include:
+Parameter estimation error
+Relative error
+Bias
+Robustness to measurement noise
+Sensitivity to missing signals
+Uncertainty in parameter estimates
+Identifiability under different observation regimes
+
+Dataset Strategy
+Public-Data Constraint
+The ideal dataset would contain simultaneous high-frequency ECG, PPG and continuous arterial pressure, reliable intervention timestamps, long longitudinal trajectories, and a large cohort with septic shock.
+
+No single fully public resource is expected to satisfy all of these requirements simultaneously.
+The project therefore adopts a layered public-data strategy, in which each resource serves a specific methodological purpose rather than attempting to force one dataset to answer every research question.
+MIMIC-BP
+MIMIC-BP will serve as the primary public ICU waveform resource for signal characterisation and multimodal waveform analysis.
+The dataset provides synchronised ECG, PPG and ABP segments, allowing investigation of:
+Signal quality
+Synchronisation
+ECG–PPG timing
+Pulse-wave morphology
+Cardiovascular feature distributions
+Multimodal representation learning
+Short-segment physiological dynamics
+Because the available segments are relatively short, MIMIC-BP will primarily support signal-level and representation-level analysis rather than long-term clinical trajectory modelling.
+
+VitalDB
+VitalDB will provide complementary high-frequency peri-operative waveform data and documented interventions.
+It will be used to investigate:
+High-frequency waveform morphology
+ECG–PPG–ABP relationships
+Pulse timing and morphology
+Physiological responses around documented interventions
+Short-term changes in arterial pressure and waveform characteristics
+VitalDB is not treated as a septic-shock cohort. Its value in this project is its high-resolution multimodal waveform data and availability of intervention information.
+
+Reduced-Order Cardiovascular Simulator
+A reduced-order cardiovascular model will provide the controlled ground-truth environment.
+A Windkessel-type or related multi-compartment model will be used to generate physiological signals from known parameters.
+The simulator will allow controlled variation of:
+Vascular resistance
+Arterial compliance
+Cardiac output-related parameters
+Arterial load
+Measurement noise
+Physiological perturbations
+
+Synthetic ECG-, PPG-, and ABP-like observations will be generated from known latent parameters.
+Because the true parameters are known, the simulator provides the only environment in which true parameter-recovery error and identifiability can be directly quantified.
+
+Core Technical Objectives
+Objective 1 — Characterise public multimodal physiological signals
+Characterise ECG, PPG and ABP recordings in MIMIC-BP and VitalDB with respect to:
+Signal quality
+Synchronisation
+Sampling characteristics
+Missingness
+Morphological variability
+Basic cardiovascular feature distributions
+
+Objective 2 — Develop a multimodal signal-processing pipeline
+Develop preprocessing and feature-extraction methods including:
+Signal-quality assessment
+Beat detection
+Signal synchronisation
+Pulse segmentation
+Pulse timing
+Waveform morphology
+Beat-to-beat variability
+ECG–PPG relationships
+
+Objective 3 — Develop a reduced-order cardiovascular simulator
+Implement and validate a controllable cardiovascular model capable of generating multimodal physiological observations from known latent parameters.
+Measurement noise and observation limitations will be incorporated to approximate real-world conditions.
+
+Objective 4 — Quantify parameter identifiability
+Systematically evaluate recovery of latent parameters under:
+PPG alone
+PPG + ECG
+PPG + ECG + ABP
+PPG + ECG + ABP + intervention information
+The analysis will determine which latent parameters can be recovered reliably and under what observation conditions.
+
+Objective 5 — Investigate short-horizon trajectory forecasting
+Determine whether the estimated latent state contains useful information about subsequent short-term arterial pressure dynamics.
+Forecasting will initially be evaluated on controlled synthetic trajectories and suitable clean public waveform segments.
+
+Objective 6 — Establish limitations and translational requirements
+Clearly define the limitations arising from:
+Short public waveform segments
+Peri-operative rather than septic-shock populations
+Lack of continuous ground truth for latent parameters
+Limited intervention information in some datasets
+Differences between simulated and real physiological signals
+The study will identify what additional data would be required for future validation in septic shock.
+
+Evaluation Strategy
+The project will use different evaluation criteria for different stages.
+
+
+Synthetic data
+Primary evaluation:
+Parameter recovery error
+Relative parameter error
+Identifiability
+Robustness to noise
+Sensitivity to missing observations
+Uncertainty of estimates
+
+Public waveform data
+Primary evaluation:
+Signal quality
+Feature reliability
+Cross-signal consistency
+Representation stability
+Physiological plausibility
+Short-term trajectory prediction
+The study will not use performance on public waveform data to claim clinical effectiveness in septic shock.
+
+Work Plan and Deliverables
+Phase 1 — Public dataset characterisation
+Download and organise MIMIC-BP and VitalDB data.
+Document signal availability and sampling characteristics.
+Establish quality-control criteria.
+Implement ECG, PPG and ABP preprocessing.
+Quantify synchronisation and signal quality.
+
+Phase 2 — Cardiovascular simulator
+Implement a reduced-order cardiovascular model.
+Define controllable resistance and compliance parameters.
+Generate synthetic multimodal observations.
+Introduce realistic measurement noise.
+Validate basic physiological behaviour.
+
+Phase 3 — Identifiability experiments
+Run controlled experiments under:
+PPG only
+PPG + ECG
+PPG + ECG + ABP
+PPG + ECG + ABP + intervention information
+Quantify parameter recovery and uncertainty.
+
+Phase 4 — VitalDB exploratory analysis
+Analyse selected VitalDB cases for:
+High-frequency waveform morphology
+Multimodal signal relationships
+Physiological responses around interventions
+Short-term arterial pressure changes
+
+Phase 5 — Integration and reporting
+Produce:
+Dataset characterisation
+Signal-processing pipeline
+Simulator
+Identifiability results
+Public-data waveform analysis
+Short-horizon forecasting results
+Limitations
+Requirements for future septic-shock validation
+
+Approximate Short-Term Schedule
+Days 1–2
+Download and organise datasets
+Set up analysis environment
+Define signal-quality metrics
+Define initial feature set
+
+Days 3–7
+Complete MIMIC-BP characterisation
+Implement preprocessing pipeline
+Implement and validate reduced-order cardiovascular simulator
+
+Days 8–12
+Conduct identifiability experiments
+Evaluate observation regimes
+Begin VitalDB exploratory analysis
+
+Days 13–16
+Analyse results
+Prepare figures
+Consolidate limitations
+Write and refine the Stage-2 report
+Develop the longer-term research plan
+
+Feasibility
+The narrowed project is designed to remain feasible under a strict public-data constraint.
+MIMIC-BP and VitalDB provide complementary real-world waveform resources, while the cardiovascular simulator provides complete control over the latent parameters and experimental conditions. The use of simulation is particularly important because real clinical waveform datasets generally do not provide continuous ground-truth measurements of latent quantities such as systemic vascular resistance and arterial compliance. The project therefore does not depend on obtaining a large septic-shock cohort at the current stage.
+
+Key Limitations
+The following limitations will be explicitly acknowledged:
+MIMIC-BP contains relatively short waveform segments, limiting longitudinal analysis.
+VitalDB primarily represents peri-operative patients rather than septic-shock patients.
+Public waveform datasets do not provide continuous ground truth for all latent hemodynamic parameters.
+Intervention information is more limited in some datasets than others.
+Synthetic cardiovascular models simplify the complexity and heterogeneity of real human physiology.
+Successful parameter recovery in simulation does not establish clinical validity.
+Translation to septic-shock care will require subsequent validation using appropriately characterised clinical datasets.
+
+Expected Contribution
+The primary contribution of the study will not be a new septic-shock classifier. Instead, it will be a methodological framework for investigating the observability and identifiability of latent hemodynamic states from multimodal physiological waveforms.
+The study will establish:
+What information is contained in public ECG, PPG and ABP recordings.
+Which latent cardiovascular parameters can theoretically be recovered from these signals.
+How additional physiological observations improve identifiability.
+Whether physics-informed constraints improve recovery compared with purely data-driven approaches.
+Whether estimated latent states provide useful information for short-term pressure trajectory forecasting.
+What data and validation are required before the framework can be translated to septic-shock research.
+Ultimately, the work aims to provide a principled bridge between physiological signal measurement, cardiovascular physics, inverse modelling, and computational estimation of hidden hemodynamic states.
